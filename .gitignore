@@ -1,0 +1,17 @@
+# =========================
+# macOS 系统自动生成文件
+# =========================
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# 缩略图与图标
+Icon?
+._*
+
+# 临时文件与网络卷垃圾桶
+.Trashes
+.Spotlight-V100
+.TemporaryItems
+
+.env
