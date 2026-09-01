@@ -5,11 +5,6 @@ from datetime import datetime
 import edge_tts
 from moviepy import ImageClip, AudioFileClip, concatenate_videoclips
 
-# Marp 渲染需要无头 Chromium。本机 chromium 在 /usr/bin/chromium，
-# 通过 CHROME_PATH 显式指定给 marp-cli（避免其自行探测失败）。
-os.environ["CHROME_PATH"] = "/home/agent/.cache/ms-playwright/chromium-1234/chrome-linux/chrome"
-os.environ["PUPPETEER_EXECUTABLE_PATH"] = "/home/agent/.cache/ms-playwright/chromium-1234/chrome-linux/chrome"
-
 VOICE = "zh-CN-XiaoxiaoNeural"
 FPS = 24
 
