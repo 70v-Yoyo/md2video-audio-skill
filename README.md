@@ -129,3 +129,11 @@ That's it. No complicated setup, no API keys, no third-party dependencies.
   - Extremely Low Barrier: If you can write Markdown, you can use it—no Premiere required.
 
   - High Controllability: Just edit the Markdown text to make changes, no need to re-record.
+
+---
+
+# Attribution
+
+Based on [md2video-audio-skill](https://github.com/70v-Yoyo/md2video-audio-skill) by 70v-Yoyo.
+
+Derivative works and redistributions must retain attribution to 70v-Yoyo and include the original repository address.
