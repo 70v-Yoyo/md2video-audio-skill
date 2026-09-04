@@ -4,8 +4,12 @@ import re
 from datetime import datetime
 import edge_tts
 from moviepy import ImageClip, AudioFileClip, concatenate_videoclips
+import time
+import random
+from aiohttp.client_exceptions import ClientConnectorError
+import webbrowser
 
-VOICE = "zh-CN-XiaoxiaoNeural"
+VOICE = "zh-CN-YunxiNeural" #女声"zh-CN-XiaoxiaoNeural"
 FPS = 24
 
 async def generate_audio(text, output_path):
@@ -25,9 +29,69 @@ def build_video_from_files(slide_md_path, script_md_path):
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     output_mp4 = os.path.join(dir_name, f"{base_name}_{timestamp}.mp4") if dir_name else f"{base_name}_{timestamp}.mp4"
 
+    # ============================================================
+    # 1. 先导出 HTML，方便检查 Marp 最终生成的 HTML/CSS
+    # ============================================================
+    print(f"1. 正在调用 Marp 将 Markdown [{slide_md_path}] 导出为 HTML...")
+
+    html_path = os.path.join(
+        dir_name if dir_name else ".",
+        f"{base_name}_preview_{timestamp}.html"
+    )
+
+    with open(slide_md_path, "r", encoding="utf-8") as f:
+        content = f.read()
+    print(content[:3000])
+
+    html_cmd = (
+        f'marp --engine @marp-team/marp-core/full '
+        f'--allow-local-files '
+        f'--html '
+        f'-o "{html_path}" '
+        f'"{slide_md_path}"'
+    )
+
+    exit_code = os.system(html_cmd)
+
+    if exit_code != 0:
+        print("错误: Marp HTML 导出失败，请检查 marp-cli 是否正常安装。")
+        return
+
+    print(f"HTML 预览文件已生成：{html_path}")
+
+    # ============================================================
+    # 2. 自动打开 HTML
+    # ============================================================
+    print("2. 正在打开 HTML 预览...")
+    html_abs_path = os.path.abspath(html_path)
+    webbrowser.open(f"file://{html_abs_path}")
+
+    # ============================================================
+    # 3. 等待用户确认
+    # ============================================================
+    while True:
+        confirm = input(
+            "\n请检查浏览器中的 HTML 预览。\n"
+            "确认无误，请输入 ok 继续导出图片：\n" \
+            "如果不导出图片，请输入 no 终止程序：\n"
+        ).strip().lower()
+
+        if confirm == "ok":
+            break
+        elif confirm == "no":
+            print("用户选择不导出图片，程序终止。")
+            return
+        else:
+            print("输入无效，请重新输入。")
+
+    # ============================================================
+    # 4. 用户确认后，再导出 PNG
+    # ============================================================
+
     print(f"1. 正在调用 Marp 将画面 Markdown [{slide_md_path}] 渲染为 PPT 高清图片...")
     # 核心：让 Marp 针对画面 md 生成图片
-    exit_code = os.system(f"marp '{slide_md_path}' --images png")
+    exit_code = os.system(f"npx marp --engine @marp-team/marp-core/full --allow-local-files --images png --image-scale 2 {slide_md_path}")
+
     if exit_code != 0:
         print("错误: Marp 渲染失败，请检查是否安装了 marp-cli 及谷歌浏览器内核。")
         return
@@ -78,7 +142,26 @@ def build_video_from_files(slide_md_path, script_md_path):
         audio_path = os.path.join(target_dir, f"temp_audio_{base_name}_{page_num}.mp3")
         temp_audio_files.append(audio_path)
         
-        asyncio.run(generate_audio(speech_clean, audio_path))
+        max_retries = 5  # 最大重试次数
+        for attempt in range(max_retries):
+            try:
+                # 执行原本的生成命令
+                asyncio.run(generate_audio(speech_clean, audio_path))
+                
+                # 💡 成功后，随机冷却 2~4 秒，防止连续请求被微软识别为爬虫
+                time.sleep(random.uniform(2.0, 4.0))
+                break  # 成功生成，跳出重试循环
+                
+            except (ClientConnectorError, ConnectionResetError) as e:
+                if attempt < max_retries - 1:
+                    # 💡 失败后，成倍延长等待时间（指数退避策略），等待 10s, 20s, 30s...
+                    wait_time = (attempt + 1) * 10
+                    print(f"⚠️ 微软限流或网络断连，将在 {wait_time} 秒后进行第 {attempt + 1} 次重试...")
+                    time.sleep(wait_time)
+                else:
+                    print("❌ 连续多次重试失败，请检查代理网络。")
+                    raise e
+
 
         audio_clip = AudioFileClip(audio_path)
         duration = max(audio_clip.duration, 2.5) # 每页至少停留 2.5 秒
