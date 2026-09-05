@@ -41,7 +41,7 @@ npm install @marp-team/marp-cli@latest \
   - 在合适位置自然放置彩色表情/图标（如emoji）但要保证系统兼容性、HTML能正常渲染出来。
   
   
-    - 规范代码块格式，并在代码块上方或前后由 AI 自动补充自然的过渡引导语。md文件里正常写mermaid没有报错则不用动它。
+    - 代码块里：一行过长按逻辑换行、行数过多按逻辑拆分成合适行数的多个代码块。代码块外前后补充自然过渡引导语。md文件里正常写mermaid没有报错则不用动它。
   
 
 ### 3. 生成展示稿
@@ -62,6 +62,7 @@ npm install @marp-team/marp-cli@latest \
       font-size: 25px;
       line-height: 1.4;
       /* ===== 页面布局 ===== */
+      grid-template-columns: 88%; 
       margin: 0 auto;
       padding: 20px;
       display: grid;
@@ -73,10 +74,15 @@ npm install @marp-team/marp-cli@latest \
       font-size: 1em;
       line-height: 1.35;
       margin: 0.5em 0;
+      /* 关键：允许内部代码在达到 max-width 时自动换行 */
+    	white-space: pre-wrap !important; 
+   		word-break: break-word;
     }
 
     pre code {
       font-size: 1em;
+      white-space: pre-wrap !important; /* 允许在长单词、长行内自动换行 */
+    	word-break: break-all;
     }
 
     /* ===== 标题体系 ===== */
@@ -123,12 +129,11 @@ npm install @marp-team/marp-cli@latest \
   ---
 
   # 核心架构解析
-  ### 零代码排版，享受高级 PPT 质感
+  ## hi
 
   ---
 
   ## 章节一：背景介绍
-  - 现代化大模型应用落地
   - 向量检索与索引平衡
     - HNSW 索引平衡速度和精度
     - IVF_PQ 算法加速
@@ -137,9 +142,8 @@ npm install @marp-team/marp-cli@latest \
 
   ## 章节二：核心代码示例
   ```python
-  # 这里会自动获得精美的高亮排版
   def hello():
-      print("Hello Marp!")
+      print("hi")
   ```
 
 2. 将HTML标签尽可能都转换为markdown形式表示，如`<img>`转换为`![]()`而里面参数不变
