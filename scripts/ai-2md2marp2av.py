@@ -90,7 +90,7 @@ def build_video_from_files(slide_md_path, script_md_path):
 
     print(f"1. 正在调用 Marp 将画面 Markdown [{slide_md_path}] 渲染为 PPT 高清图片...")
     # 核心：让 Marp 针对画面 md 生成图片
-    exit_code = os.system(f"npx marp --engine @marp-team/marp-core/full --allow-local-files --images png --image-scale 2 {slide_md_path}")
+    exit_code = os.system(f"npx marp --engine @marp-team/marp-core/full --allow-local-files --html --images png --image-scale 2 {slide_md_path}")
 
     if exit_code != 0:
         print("错误: Marp 渲染失败，请检查是否安装了 marp-cli 及谷歌浏览器内核。")
@@ -142,7 +142,7 @@ def build_video_from_files(slide_md_path, script_md_path):
         audio_path = os.path.join(target_dir, f"temp_audio_{base_name}_{page_num}.mp3")
         temp_audio_files.append(audio_path)
         
-        max_retries = 5  # 最大重试次数
+        max_retries = 10  # 最大重试次数
         for attempt in range(max_retries):
             try:
                 # 执行原本的生成命令
