@@ -1,3 +1,13 @@
+ [![npm downloads](https://img.shields.io/npm/dt/md2video-audio-skill?style=flat-square&logo=npm)](https://www.npmjs.com/package/md2video-audio-skill) [![README Views](https://visitor-badge.laobi.icu/badge?page_id=70v-Yoyo.md2video-audio-skill&left_text=README%20Views)](https://github.com/70v-Yoyo/md2video-audio-skill) [![License](https://img.shields.io/github/license/70v-Yoyo/md2video-audio-skill?style=flat-square)](https://github.com/70v-Yoyo/md2video-audio-skill/blob/main/LICENSE) 
+
+---
+
+能被你 `git clone` 或是阅读，是作为作者最开心的事！如果它解决了你的问题，不妨点亮右上角的小星星，不仅防止找不到仓库，还能动态推送追更哦。
+
+💖 **用一个免费的 ⭐ Star 帮我加速吧！Thank You !** 
+
+---
+
 # md2video-audio-skill
 
 One Markdown file + a one-click command = professional-grade talking-head videos. ｜ 一个 Markdown 文件 + 一键命令 = 专业级口播视频。
@@ -61,6 +71,8 @@ curl -fsSL https://www.modelscope.cn/skills/install.sh | bash -s -- nihaoModelsc
 4. **可控性强** —— 文案改 MD 就行，不用重新录制
 
 -----
+
+
 
 # md2video-audio-skill- EN
 

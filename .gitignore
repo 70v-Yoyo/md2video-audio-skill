@@ -14,4 +14,26 @@ Icon?
 .Spotlight-V100
 .TemporaryItems
 
+# 敏感配置文件
 .env
+
+# =========================
+# Python 编译、打包与虚拟环境缓存（新增）
+# =========================
+# 过滤本地运行 python -m build 生成的发布压缩包目录
+dist/
+build/
+
+# 过滤 Python 自动生成的元数据描述文件夹
+*.egg-info/
+.eggs/
+
+# 过滤 Python 运行时自动生成的字节码缓存（杜绝 __pycache__ 污染）
+__pycache__/
+*.py[cod]
+*$py.class
+
+# 过滤你本地可能用到的 Python 虚拟环境目录
+.venv/
+venv/
+env/
