@@ -1,4 +1,4 @@
- [![npm downloads](https://img.shields.io/npm/dt/md2video-audio-skill?style=flat-square&logo=npm)](https://www.npmjs.com/package/md2video-audio-skill) [![README Views](https://visitor-badge.laobi.icu/badge?page_id=70v-Yoyo.md2video-audio-skill&left_text=README%20Views)](https://github.com/70v-Yoyo/md2video-audio-skill) [![License](https://img.shields.io/github/license/70v-Yoyo/md2video-audio-skill?style=flat-square)](https://github.com/70v-Yoyo/md2video-audio-skill/blob/main/LICENSE) 
+[![PyPI Total Downloads](https://shields.io)](https://pepy.tech/projects/md2video-audio-skill)  [![README Views](https://visitor-badge.laobi.icu/badge?page_id=70v-Yoyo.md2video-audio-skill&left_text=README%20Views)](https://github.com/70v-Yoyo/md2video-audio-skill) [![License](https://img.shields.io/github/license/70v-Yoyo/md2video-audio-skill?style=flat-square)](https://github.com/70v-Yoyo/md2video-audio-skill/blob/main/LICENSE) 
 
 ---
 
