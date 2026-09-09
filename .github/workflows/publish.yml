@@ -1,0 +1,30 @@
+name: 自动发布到 PyPI
+
+on:
+  release:
+    types: [published] # 只有当你在 GitHub 网页上真正点击“发布新版本”时才触发
+
+jobs:
+  build-n-publish:
+    name: 编译并安全上传至 PyPI
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write # 这个核心权限必须开启，用于和 PyPI 官方进行无密钥安全握手
+
+    steps:
+      - name: 拉取代码
+        uses: actions/checkout@v4
+
+      - name: 设置 Python 环境
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: 安装现代打包工具
+        run: pip install build
+
+      - name: 编译出静态包
+        run: python -m build
+
+      - name: 通过免密认证发布到 PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1 # 官方受信任的发布插件
