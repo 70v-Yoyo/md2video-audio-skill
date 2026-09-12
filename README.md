@@ -49,7 +49,7 @@ curl -fsSL https://www.modelscope.cn/skills/install.sh | bash -s -- nihaoModelsc
 /md2video-audio your-presentation.md
 ```
 
-就这样。没有复杂配置，没有 API 密钥，没有第三方依赖。
+就这样。没有复杂配置，只需要 AI API Key，除此之外不依赖任何额外付费服务。
 
 ----
 
@@ -116,7 +116,7 @@ Markdown Document → Marp Slides + Edge-TTS Voice → Finished MP4
 
 `/md2video-audio your-presentation.md`
 
-That's it. No complicated setup, no API keys, no third-party dependencies.
+That's it. No complicated setup, no extra paid services — just your AI API key.
 
 - Suitable Scenarios?
 
