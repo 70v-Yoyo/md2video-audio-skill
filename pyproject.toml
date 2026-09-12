@@ -4,8 +4,8 @@ build-backend = "hatchling.build"
 
 [project]
 name = "md2video-audio-skill"
-version = "1.0.0"
-description = "One Markdown file + a one-click command = professional-grade talking-head videos. ｜ 一个 Markdown 文件 + 一键命令 = 专业级口播视频。"
+version = "1.0.1"
+description = "One Markdown file + a one-click command = presentation-style video with synchronized narration. ｜ 一个 Markdown 文件 + 一键命令 = 专业级口播视频。"
 readme = "README.md"
 requires-python = ">=3.8"
 license = { text = "Apache-2.0" }

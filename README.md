@@ -10,7 +10,7 @@
 
 # md2video-audio-skill
 
-One Markdown file + a one-click command = professional-grade talking-head videos. ｜ 一个 Markdown 文件 + 一键命令 = 专业级口播视频。
+One Markdown file + a one-click command = presentation-style video with synchronized narration. ｜ 一个 Markdown 文件 + 一键命令 = 专业级口播视频。
 
 - ✨ `/md2video-audio` 是什么神仙技能？
 
@@ -76,7 +76,7 @@ curl -fsSL https://www.modelscope.cn/skills/install.sh | bash -s -- nihaoModelsc
 
 # md2video-audio-skill- EN
 
-One Markdown file + a one-click command = professional-grade talking-head videos.
+One Markdown file + a one-click command = presentation-style video with synchronized narration.
 
 ✨ What kind of magical skill is `/md2video-audio`?
 
