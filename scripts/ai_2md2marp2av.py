@@ -8,6 +8,7 @@ import time
 import random
 from aiohttp.client_exceptions import ClientConnectorError
 import webbrowser
+import subprocess
 
 VOICE = "zh-CN-YunxiNeural" #女声"zh-CN-XiaoxiaoNeural"
 FPS = 24
@@ -43,18 +44,25 @@ def build_video_from_files(slide_md_path, script_md_path):
         content = f.read()
     print(content[:3000])
 
-    html_cmd = (
-        f'marp --engine @marp-team/marp-core/full '
-        f'--allow-local-files '
-        f'--html '
-        f'-o "{html_path}" '
-        f'"{slide_md_path}"'
-    )
-
-    exit_code = os.system(html_cmd)
-
-    if exit_code != 0:
-        print("错误: Marp HTML 导出失败，请检查 marp-cli 是否正常安装。")
+    try:
+        subprocess.run(
+            [
+                "marp",
+                "--engine",
+                "@marp-team/marp-core/full",
+                "--allow-local-files",
+                "--html",
+                "-o",
+                str(html_path),
+                str(slide_md_path),
+            ],
+            check=True,
+        )
+    except FileNotFoundError:
+        print("Error: Marp CLI was not found. Please install @marp-team/marp-cli.")
+        return
+    except subprocess.CalledProcessError as error:
+        print(f"Error: Marp HTML rendering failed with exit code {error.returncode}.")
         return
 
     print(f"HTML 预览文件已生成：{html_path}")
@@ -90,10 +98,29 @@ def build_video_from_files(slide_md_path, script_md_path):
 
     print(f"1. 正在调用 Marp 将画面 Markdown [{slide_md_path}] 渲染为 PPT 高清图片...")
     # 核心：让 Marp 针对画面 md 生成图片
-    exit_code = os.system(f"npx marp --engine @marp-team/marp-core/full --allow-local-files --html --images png --image-scale 2 {slide_md_path}")
 
-    if exit_code != 0:
-        print("错误: Marp 渲染失败，请检查是否安装了 marp-cli 及谷歌浏览器内核。")
+    try:
+        subprocess.run(
+            [
+                "npx",
+                "marp",
+                "--engine",
+                "@marp-team/marp-core/full",
+                "--allow-local-files",
+                "--html",
+                "--images",
+                "png",
+                "--image-scale",
+                "2",
+                str(slide_md_path),
+            ],
+            check=True,
+        )
+    except FileNotFoundError:
+        print("Error: npx was not found. Please install Node.js and Marp CLI.")
+        return
+    except subprocess.CalledProcessError as error:
+        print(f"Error: Marp image rendering failed with exit code {error.returncode}.")
         return
     
     # 去画面 md 所在的目录下精准搜寻生成的 .png 图片

@@ -4,6 +4,7 @@ import re
 from datetime import datetime
 import edge_tts
 from moviepy import ImageClip, AudioFileClip, concatenate_videoclips
+import subprocess
 
 # Marp 渲染需要无头 Chromium。本机 chromium 在 /usr/bin/chromium，
 # 通过 CHROME_PATH 显式指定给 marp-cli（避免其自行探测失败）。
@@ -29,9 +30,22 @@ def build_video_from_marp_images(md_file_path):
 
     print("1. 正在调用 Marp 将 Markdown 渲染为 PPT 高清图片...")
     # --images png 会把每一页切成独立的高清 PNG 图片
-    exit_code = os.system(f"marp '{md_file_path}' --images png")
-    if exit_code != 0:
-        print("错误: Marp 渲染失败，请检查是否安装了 marp-cli 及谷歌浏览器内核。")
+
+    try:
+        subprocess.run(
+            [
+                "marp",
+                str(md_file_path),
+                "--images",
+                "png",
+            ],
+            check=True,
+        )
+    except FileNotFoundError:
+        print("错误：找不到 Marp CLI，请检查是否已安装并配置到 PATH 环境变量。")
+        return
+    except subprocess.CalledProcessError as error:
+        print(f"错误：Marp 渲染失败，退出码为 {error.returncode}。")
         return
     
     # 去 md 所在的目录下精准搜寻生成的 .png 图片
