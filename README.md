@@ -6,6 +6,8 @@
 
 💖 **用一个免费的 ⭐ Star 帮我加速吧！Thank You !** 
 
+**⚠️ This project uses an unofficial interface to Microsoft Edge's online text-to-speech service and is intended for personal, educational, and experimental use only. Commercial use is not supported.**
+
 ---
 
 # md2video-audio-skill
