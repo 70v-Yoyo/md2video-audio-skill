@@ -1,4 +1,4 @@
-[![PyPI Downloads](https://static.pepy.tech/personalized-badge/md2video-audio-skill?period=total&units=INTERNATIONAL_SYSTEM&left_color=BLACK&right_color=GREEN&left_text=downloads)](https://pepy.tech/projects/md2video-audio-skill)  [![README Views](https://visitor-badge.laobi.icu/badge?page_id=70v-Yoyo.md2video-audio-skill&left_text=README%20Views)](https://github.com/70v-Yoyo/md2video-audio-skill) [![License](https://img.shields.io/github/license/70v-Yoyo/md2video-audio-skill?style=flat-square)](https://github.com/70v-Yoyo/md2video-audio-skill/blob/main/LICENSE) 
+[![PyPI Downloads](https://static.pepy.tech/personalized-badge/md2video-audio-skill?period=total&units=INTERNATIONAL_SYSTEM&left_color=BLACK&right_color=GREEN&left_text=downloads)](https://pepy.tech/projects/md2video-audio-skill)  [![README Views](https://visitor-badge.laobi.icu/badge?page_id=70v-Yoyo.md2video-audio-skill&left_text=README%20Views)](https://github.com/70v-Yoyo/md2video-audio-skill) [![skills.sh](https://skills.sh/b/70v-Yoyo/md2video-audio-skill)](https://skills.sh/70v-Yoyo/md2video-audio-skill)  [![License](https://img.shields.io/github/license/70v-Yoyo/md2video-audio-skill?style=flat-square)](https://github.com/70v-Yoyo/md2video-audio-skill/blob/main/LICENSE) 
 
 ---
 
@@ -45,6 +45,8 @@ pip install --upgrade modelscope
 modelscope skills add nihaoModelscope/md2video-audio-skill
 #3 bash安装
 curl -fsSL https://www.modelscope.cn/skills/install.sh | bash -s -- nihaoModelscope/md2video-audio-skill
+#4 skill.sh安装
+npx skills add 70v-Yoyo/md2video-audio-skill
 
 #使用方法
 # 在 Claude Code 里输入： 其他agent也可轻松适配
@@ -111,6 +113,10 @@ Markdown Document → Marp Slides + Edge-TTS Voice → Finished MP4
 3. bash installation
 
 `curl -fsSL https://www.modelscope.cn/skills/install.sh | bash -s -- nihaoModelscope/md2video-audio-skill`
+
+4. skill.sh
+
+`npx skills add 70v-Yoyo/md2video-audio-skill `
 
 ## Usage
 
