@@ -26,7 +26,7 @@ See the corresponding reference file: `references/environment.md`.
 
 ### 2. Generate the Optimized Document
 
-- Do not modify the original file.
+- Do not modify the original file. Read the content of the original manuscript first.
 - Output: Save the result as a new Markdown file named `new-<original-filename-prefix>-<timestamp>.md`.
 - Preserve the original wording, content, and logic. Only perform necessary paragraph and section restructuring, add colors, and insert natural introductory, transitional, and concluding phrases.
 - See the corresponding reference file: `references/newscript.md`.

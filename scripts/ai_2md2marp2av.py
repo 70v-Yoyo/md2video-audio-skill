@@ -176,13 +176,13 @@ def build_video_from_files(slide_md_path, script_md_path):
                 asyncio.run(generate_audio(speech_clean, audio_path))
                 
                 # 💡 成功后，随机冷却 2~4 秒，防止连续请求被微软识别为爬虫
-                time.sleep(random.uniform(2.0, 4.0))
+                time.sleep(random.uniform(2.0, 8.0))
                 break  # 成功生成，跳出重试循环
                 
             except (ClientConnectorError, ConnectionResetError) as e:
                 if attempt < max_retries - 1:
                     # 💡 失败后，成倍延长等待时间（指数退避策略），等待 10s, 20s, 30s...
-                    wait_time = (attempt + 1) * 10
+                    wait_time = (attempt + 1) * 17
                     print(f"⚠️ 微软限流或网络断连，将在 {wait_time} 秒后进行第 {attempt + 1} 次重试...")
                     time.sleep(wait_time)
                 else:
