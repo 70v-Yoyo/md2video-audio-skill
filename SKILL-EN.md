@@ -48,7 +48,7 @@ See the corresponding reference file: `references/environment.md`.
 
 - Output: Save the result as a new Markdown file named `speaking-<original-filename-prefix>-<timestamp>.md`.
 - Generate a natural and logically coherent narration script based on the presentation document:
-  1. Add `---` as the first line of the narration script, then start the narration for the first slide on the next line.
+  1. The first line at the very beginning of the narration script should be `---`. The second line should also be `---`. Then insert a line break and start writing the narration for the first page from the third line onward.
   2. Remove miscellaneous emoji, decorative icons, and other presentation-only characters that would sound unnatural when read aloud. Preserve slide separators.
 - Verify that the narration script and presentation document contain the same number of `---` slide separators. Run the following regular-expression command:
 
